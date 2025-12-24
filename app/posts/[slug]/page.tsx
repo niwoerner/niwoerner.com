@@ -1,14 +1,26 @@
 import { notFound } from "next/navigation";
+import { MDXRemote } from "next-mdx-remote/rsc";
 import { Header } from "@/components/header";
 import { Container } from "@/components/container";
 import { PostHeader } from "@/components/post-header";
 import { Prose } from "@/components/prose";
 import { PostNavigation } from "@/components/post-navigation";
 import { getPostBySlug, getAllPosts, getAdjacentPosts } from "@/lib/posts";
+import {
+  SplitSection,
+  SplitContent,
+  SplitPlayground,
+} from "@/components/split-section";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+const components = {
+  SplitSection,
+  SplitContent,
+  SplitPlayground,
+};
 
 export async function generateStaticParams() {
   const posts = getAllPosts();
@@ -39,8 +51,6 @@ export default async function PostPage({ params }: PageProps) {
 
   const { prev, next } = getAdjacentPosts(slug);
 
-  const { default: Content } = await import(`@/content/posts/${slug}.mdx`);
-
   return (
     <>
       <Header />
@@ -49,7 +59,7 @@ export default async function PostPage({ params }: PageProps) {
           <article>
             <PostHeader title={post.title} date={post.date} />
             <Prose className="mt-8">
-              <Content />
+              <MDXRemote source={post.content} components={components} />
             </Prose>
             <PostNavigation prev={prev} next={next} />
           </article>

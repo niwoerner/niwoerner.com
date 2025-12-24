@@ -1,36 +1,112 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# niwoerner.com
+
+Personal blog built with Next.js, MDX, and ShadCN.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adding a New Post
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a new `.mdx` file in `content/posts/`:
 
-## Learn More
+```
+content/posts/your-post-slug.mdx
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Frontmatter Format
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Every post must start with frontmatter:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```mdx
+---
+title: Your Post Title
+excerpt: A brief description shown on the homepage.
+date: 2024-12-25
+---
 
-## Deploy on Vercel
+Your content here...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| Field | Required | Description |
+|-------|----------|-------------|
+| `title` | Yes | Post title |
+| `excerpt` | Yes | Short description for post card |
+| `date` | Yes | Publication date (YYYY-MM-DD) |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Markdown Support
+
+Standard markdown is supported:
+
+- **Headings:** `## H2`, `### H3`
+- **Lists:** `-` or `1.`
+- **Code blocks:** Triple backticks with language
+- **Links:** `[text](url)`
+- **Bold/Italic:** `**bold**`, `*italic*`
+
+### Code Blocks
+
+````mdx
+```typescript
+function example(): string {
+  return "Hello";
+}
+```
+````
+
+### Split View (Interactive Sections)
+
+For posts with interactive examples, use the `SplitSection` component:
+
+```mdx
+<SplitSection>
+  <SplitContent>
+    Text explaining the concept...
+  </SplitContent>
+  <SplitPlayground>
+    <YourInteractiveComponent />
+  </SplitPlayground>
+</SplitSection>
+```
+
+- **Desktop:** Side-by-side layout (text left, playground right)
+- **Mobile:** Stacked vertically
+
+## Project Structure
+
+```
+app/
+├── page.tsx              # Landing page
+├── layout.tsx            # Root layout
+├── globals.css           # Theme + styles
+└── posts/[slug]/
+    └── page.tsx          # Post page
+
+components/
+├── ui/                   # ShadCN components
+├── header.tsx            # Site header
+├── post-card.tsx         # Post card for listing
+├── post-header.tsx       # Post title + meta
+├── prose.tsx             # Markdown content wrapper
+├── split-section.tsx     # Two-column layout
+└── theme-toggle.tsx      # Dark mode toggle
+
+content/
+└── posts/                # MDX blog posts
+    └── *.mdx
+
+lib/
+└── posts.ts              # Post utilities
+```
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Styling:** Tailwind CSS v4, ShadCN
+- **Content:** MDX with remark plugins
+- **Theme:** Light/dark mode via next-themes

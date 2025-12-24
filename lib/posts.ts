@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 
 export interface Post {
   slug: string;
@@ -18,39 +19,6 @@ export interface PostMeta {
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
-function parseFrontmatter(fileContent: string): {
-  meta: Omit<Post, "slug" | "content">;
-  content: string;
-} {
-  const frontmatterRegex = /^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/;
-  const match = fileContent.match(frontmatterRegex);
-
-  if (!match) {
-    throw new Error("Invalid frontmatter format");
-  }
-
-  const frontmatterBlock = match[1];
-  const content = match[2];
-
-  const meta: Record<string, string> = {};
-  frontmatterBlock.split("\n").forEach((line) => {
-    const [key, ...valueParts] = line.split(":");
-    if (key && valueParts.length > 0) {
-      const value = valueParts.join(":").trim();
-      meta[key.trim()] = value.replace(/^["']|["']$/g, "");
-    }
-  });
-
-  return {
-    meta: {
-      title: meta.title || "",
-      excerpt: meta.excerpt || "",
-      date: meta.date || "",
-    },
-    content,
-  };
-}
-
 export function getAllPosts(): PostMeta[] {
   if (!fs.existsSync(postsDirectory)) {
     return [];
@@ -63,11 +31,13 @@ export function getAllPosts(): PostMeta[] {
       const slug = fileName.replace(/\.mdx$/, "");
       const fullPath = path.join(postsDirectory, fileName);
       const fileContents = fs.readFileSync(fullPath, "utf8");
-      const { meta } = parseFrontmatter(fileContents);
+      const { data } = matter(fileContents);
 
       return {
         slug,
-        ...meta,
+        title: data.title || "",
+        excerpt: data.excerpt || "",
+        date: data.date ? String(data.date) : "",
       };
     });
 
@@ -84,11 +54,13 @@ export function getPostBySlug(slug: string): Post | null {
   }
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
-  const { meta, content } = parseFrontmatter(fileContents);
+  const { data, content } = matter(fileContents);
 
   return {
     slug,
-    ...meta,
+    title: data.title || "",
+    excerpt: data.excerpt || "",
+    date: data.date ? String(data.date) : "",
     content,
   };
 }
