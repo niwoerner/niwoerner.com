@@ -29,10 +29,10 @@ export function Intro() {
           .
         </p>
         <p className="text-base text-muted-foreground">
-          Besides that, I'm always looking to optimize my dev workflow by exploring new tools or building them on my own.
+          Besides that, I&apos;m always looking to optimize my dev workflow by exploring new tools or building them on my own.
         </p>
         <p className="text-base text-muted-foreground">
-          On this page, I'm sharing my learnings and opinions based on my practical experience. It'll be mostly focused on things related to AI, but sometimes I might also write about other topics that catch my interest. (For observability topics, check out the{" "}
+          On this page, I&apos;m sharing my learnings and opinions based on my practical experience. It&apos;ll be mostly focused on things related to AI, but sometimes I might also write about other topics that catch my interest. (For observability topics, check out the{" "}
           <Link
             href="https://blog.olly.garden/"
             target="_blank"
@@ -53,7 +53,7 @@ export function Intro() {
           .)
         </p>
         <p className="text-base text-muted-foreground"> 
-          PS: Everything you'll read here is 100% handwritten.
+          PS: Everything you&apos;ll read here is 100% handwritten.
         </p>
       </div>  
     </section>
