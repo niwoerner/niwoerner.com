@@ -49,6 +49,26 @@ Standard markdown is supported:
 - **Links:** `[text](url)`
 - **Bold/Italic:** `**bold**`, `*italic*`
 
+### Text Styling Options
+
+| Syntax | Renders as | Style |
+|--------|------------|-------|
+| `*italic*` | *italic* | Italic text |
+| `**bold**` | **bold** | Bold text |
+| `***bold italic***` | ***bold italic*** | Bold + italic |
+| `[link](url)` | link | Primary (orange) color |
+| `` `code` `` | `code` | Gray bg, monospace, smaller |
+| `_emphasis_` | _emphasis_ | Italic (same as `*`) |
+| `<Mark>text</Mark>` | highlighted | Subtle primary bg tint |
+
+### Highlight Component
+
+Use `<Mark>` for inline text emphasis with a subtle primary background:
+
+```mdx
+We stayed in contact, and <Mark>I told Juraci</Mark> about my interest.
+```
+
 ### Code Blocks
 
 ````mdx

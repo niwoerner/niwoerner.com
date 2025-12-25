@@ -13,6 +13,7 @@ import {
   SplitPlayground,
 } from "@/components/split-section";
 import { CounterPlayground } from "@/components/playgrounds/counter-playground";
+import { Mark } from "@/components/mark";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -23,6 +24,7 @@ const components = {
   SplitContent,
   SplitPlayground,
   CounterPlayground,
+  Mark,
 };
 
 const options = {
