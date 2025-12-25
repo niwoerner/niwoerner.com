@@ -14,6 +14,7 @@ import {
 } from "@/components/split-section";
 import { CounterPlayground } from "@/components/playgrounds/counter-playground";
 import { Mark } from "@/components/mark";
+import { Comments } from "@/components/comments";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -89,6 +90,7 @@ export default async function PostPage({ params }: PageProps) {
               />
             </Prose>
             <PostNavigation prev={prev} next={next} />
+            {post.comments && <Comments slug={slug} />}
           </article>
         </Container>
       </main>

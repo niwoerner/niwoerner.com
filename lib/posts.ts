@@ -8,6 +8,7 @@ export interface Post {
   excerpt: string;
   date: string;
   content: string;
+  comments: boolean;
 }
 
 export interface PostMeta {
@@ -70,6 +71,7 @@ export function getPostBySlug(slug: string): Post | null {
     excerpt: data.excerpt || "",
     date: data.date ? String(data.date) : "",
     content,
+    comments: data.comments !== false,
   };
 }
 
