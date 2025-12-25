@@ -1,0 +1,99 @@
+---
+title: Building Interactive Blog Posts
+excerpt: How to create blog posts with interactive examples using the split section layout.
+date: 2025-12-24
+---
+
+Sometimes explanations work better with interactive examples. This post demonstrates how to combine prose with live playgrounds.
+
+## The Split Section Pattern
+
+The split section layout places explanatory text on the left and an interactive example on the right. On mobile, they stack vertically.
+
+<SplitSection>
+  <SplitContent>
+    ### How State Works in React
+
+    React components can have **state** — data that changes over time and triggers re-renders.
+
+    The `useState` hook returns two things:
+    1. The current value
+    2. A function to update it
+
+    When you call the setter function, React re-renders the component with the new value.
+
+    Try clicking the buttons to see state in action.
+  </SplitContent>
+  <SplitPlayground>
+    <CounterPlayground />
+  </SplitPlayground>
+</SplitSection>
+
+## The Code Behind It
+
+Here's the implementation of the counter playground:
+
+```tsx
+"use client";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+
+export function CounterPlayground() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div className="flex flex-col items-center gap-4">
+      <div className="text-5xl font-bold">{count}</div>
+      <div className="flex gap-2">
+        <Button onClick={() => setCount((c) => c - 1)}>-1</Button>
+        <Button onClick={() => setCount(0)}>Reset</Button>
+        <Button onClick={() => setCount((c) => c + 1)}>+1</Button>
+      </div>
+    </div>
+  );
+}
+```
+
+The key parts:
+
+- `"use client"` marks this as a client component (needed for interactivity)
+- `useState(0)` initializes the count at zero
+- Each button calls `setCount` with a new value
+
+## When to Use Split Sections
+
+Split sections work well for:
+
+- **Interactive demos** — let readers experiment with concepts
+- **Code + output** — show code alongside its result
+- **Before/after comparisons** — visualize changes side by side
+- **Configuration examples** — adjust settings and see effects
+
+They're less useful for:
+
+- Long-form prose that needs full width
+- Content that doesn't benefit from a visual aid
+- Mobile-first content where stacking hurts the experience
+
+## Creating Your Own
+
+To add a split section to your posts:
+
+```mdx
+<SplitSection>
+  <SplitContent>
+    Your explanatory text here...
+  </SplitContent>
+  <SplitPlayground>
+    <YourInteractiveComponent />
+  </SplitPlayground>
+</SplitSection>
+```
+
+The playground component must be:
+1. Created in `components/playgrounds/`
+2. Added to the `components` object in the post page
+3. Marked with `"use client"` if it uses hooks or event handlers
+
+That's it. Now you can build posts that teach through interaction.

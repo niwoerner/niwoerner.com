@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import rehypePrettyCode from "rehype-pretty-code";
 import { Header } from "@/components/header";
 import { Container } from "@/components/container";
 import { PostHeader } from "@/components/post-header";
@@ -11,6 +12,7 @@ import {
   SplitContent,
   SplitPlayground,
 } from "@/components/split-section";
+import { CounterPlayground } from "@/components/playgrounds/counter-playground";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -20,6 +22,25 @@ const components = {
   SplitSection,
   SplitContent,
   SplitPlayground,
+  CounterPlayground,
+};
+
+const options = {
+  mdxOptions: {
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: {
+            dark: "github-dark",
+            light: "github-light",
+          },
+          keepBackground: false,
+        },
+      ],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ] as any,
+  },
 };
 
 export async function generateStaticParams() {
@@ -59,7 +80,11 @@ export default async function PostPage({ params }: PageProps) {
           <article>
             <PostHeader title={post.title} date={post.date} />
             <Prose className="mt-8">
-              <MDXRemote source={post.content} components={components} />
+              <MDXRemote
+                source={post.content}
+                components={components}
+                options={options}
+              />
             </Prose>
             <PostNavigation prev={prev} next={next} />
           </article>

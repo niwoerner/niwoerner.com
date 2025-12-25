@@ -125,3 +125,36 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Code block styling for rehype-pretty-code */
+[data-rehype-pretty-code-figure] {
+  @apply my-6;
+}
+
+[data-rehype-pretty-code-figure] pre {
+  @apply rounded-xl p-4 overflow-x-auto text-sm;
+}
+
+[data-rehype-pretty-code-figure] code {
+  @apply font-mono;
+  counter-reset: line;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply px-4 -mx-4;
+}
+
+/* Light mode code block */
+:root [data-rehype-pretty-code-figure] pre {
+  @apply bg-secondary border border-border;
+}
+
+/* Dark mode code block */
+.dark [data-rehype-pretty-code-figure] pre {
+  @apply bg-card border border-border;
+}
+
+/* Inline code */
+:not(pre) > code {
+  @apply rounded bg-muted px-1.5 py-0.5 text-sm font-mono;
+}
