@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Nicolas Wörner",
-  description: "Personal blog about software engineering and design systems",
+  description: "Thoughts about AI, software engineering, and more.",
 };
 
 export default function RootLayout({

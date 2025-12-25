@@ -1,7 +1,5 @@
 # niwoerner.com
 
-Personal blog built with Next.js, MDX, and ShadCN.
-
 ## Getting Started
 
 ```bash
