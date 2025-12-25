@@ -10,7 +10,7 @@ export default function Page() {
       <main>
         <Container>
           <Intro />
-          <PostList />
+          <PostList limit={2} showViewAll />
         </Container>
       </main>
     </>

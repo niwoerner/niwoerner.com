@@ -1,24 +1,5 @@
 import Link from "next/link";
-import { IconBrandX, IconBrandLinkedin, IconBrandGithub } from "@tabler/icons-react";
 import { ThemeToggle } from "@/components/theme-toggle";
-
-const socialLinks = [
-  {
-    name: "GitHub",
-    href: "https://github.com/niwoerner",
-    icon: IconBrandGithub,
-  },
-  {
-    name: "X",
-    href: "https://x.com/niwoerner",
-    icon: IconBrandX,
-  },
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/nicolas-woerner",
-    icon: IconBrandLinkedin,
-  },
-];
 
 export function Header() {
   return (
@@ -31,18 +12,18 @@ export function Header() {
           Nicolas Wörner
         </Link>
         <div className="flex items-center gap-1">
-          {socialLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
-              aria-label={link.name}
-            >
-              <link.icon className="h-5 w-5" />
-            </a>
-          ))}
+          <Link
+            href="/posts"
+            className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            Posts
+          </Link>
+          <Link
+            href="/contact"
+            className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            Contact
+          </Link>
           <div className="mx-1 h-5 w-px bg-border" />
           <ThemeToggle />
         </div>
