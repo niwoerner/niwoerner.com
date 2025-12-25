@@ -15,6 +15,7 @@ export interface PostMeta {
   title: string;
   excerpt: string;
   date: string;
+  draft?: boolean;
 }
 
 const postsDirectory = path.join(process.cwd(), "content/posts");
@@ -24,6 +25,7 @@ export function getAllPosts(): PostMeta[] {
     return [];
   }
 
+  const isDev = process.env.NODE_ENV === "development";
   const fileNames = fs.readdirSync(postsDirectory);
   const posts = fileNames
     .filter((name) => name.endsWith(".mdx"))
@@ -38,8 +40,10 @@ export function getAllPosts(): PostMeta[] {
         title: data.title || "",
         excerpt: data.excerpt || "",
         date: data.date ? String(data.date) : "",
+        draft: data.draft || false,
       };
-    });
+    })
+    .filter((post) => isDev || !post.draft);
 
   return posts.sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
@@ -55,6 +59,10 @@ export function getPostBySlug(slug: string): Post | null {
 
   const fileContents = fs.readFileSync(fullPath, "utf8");
   const { data, content } = matter(fileContents);
+
+  if (data.draft && process.env.NODE_ENV !== "development") {
+    return null;
+  }
 
   return {
     slug,

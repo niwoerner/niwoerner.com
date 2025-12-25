@@ -10,7 +10,7 @@ export function Prose({ children, className }: ProseProps) {
     <div
       className={cn(
         "prose prose-zinc dark:prose-invert max-w-none",
-        "prose-headings:font-semibold prose-headings:tracking-tight",
+        "prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-primary",
         "prose-h2:mt-10 prose-h2:text-2xl",
         "prose-h3:mt-8 prose-h3:text-xl",
         "prose-p:leading-relaxed",
