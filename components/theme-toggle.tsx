@@ -3,7 +3,6 @@
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { IconSun, IconMoon } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
@@ -14,17 +13,28 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <Button variant="ghost" size="icon" disabled />;
+    return (
+      <button
+        className="rounded-md p-2 text-muted-foreground"
+        disabled
+        aria-label="Toggle theme"
+      >
+        <IconMoon className="h-5 w-5" />
+      </button>
+    );
   }
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
+    <button
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+      className="cursor-pointer rounded-md p-2 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
       aria-label="Toggle theme"
     >
-      {theme === "dark" ? <IconSun /> : <IconMoon />}
-    </Button>
+      {theme === "dark" ? (
+        <IconSun className="h-5 w-5" />
+      ) : (
+        <IconMoon className="h-5 w-5" />
+      )}
+    </button>
   );
 }
