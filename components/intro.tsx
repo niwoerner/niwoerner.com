@@ -8,19 +8,25 @@ export function Intro() {
           Hi, I&apos;m Nicolas.
         </h1>
         <p className="text-base text-muted-foreground">
-          I&apos;m working at           <Link
+          I&apos;m working at{" "}
+          <Link
             href="https://ollygarden.com"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-primary transition-colors"
           >
-            OllyGarden{" "}
-          </Link>
-          where I focus on building an AI agent called {" "}
+            OllyGarden
+          </Link>{" "}
+          where I focus on building an AI agent called{" "}
           <Link
             href="https://blog.olly.garden/meet-rose-ollygardens-ai-instrumentation-agent"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-primary transition-colors"
-            >
-            Rose. 
+          >
+            Rose
           </Link>
+          .
         </p>
         <p className="text-base text-muted-foreground">
           Besides that, I'm always looking to optimize my dev workflow by exploring new tools or building them on my own.
@@ -29,6 +35,8 @@ export function Intro() {
           On this page, I'm sharing my learnings and opinions based on my practical experience. It'll be mostly focused on things related to AI, but sometimes I might also write about other topics that catch my interest. (For observability topics, check out the{" "}
           <Link
             href="https://blog.olly.garden/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-primary transition-colors"
           >
             OllyGarden blog
@@ -36,6 +44,8 @@ export function Intro() {
           or{" "}
           <Link
             href="https://www.youtube.com/@OllyGardenInc"
+            target="_blank"
+            rel="noopener noreferrer"
             className="underline underline-offset-2 hover:text-primary transition-colors"
           >
             YouTube
